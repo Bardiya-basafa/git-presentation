@@ -1,5 +1,11 @@
-FROM node 
+FROM node as base
 WORKDIR /app
-COPY . .
-RUN npm install
-CMD [ "npm","run" ,"dev" ]
+COPY package*.json .
+
+RUN npm ci
+
+FROM node as run
+WORKDIR /app
+COPY --from=base . .
+
+CMD [ "node" , "server.js" ]
