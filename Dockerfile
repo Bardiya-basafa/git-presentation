@@ -2,5 +2,5 @@ FROM node
 WORKDIR /app
 COPY . .
 RUN npm install
-RUN npm build
+RUN npm ci --prod
 CMD [ "npm","run" ,"dev" ]
